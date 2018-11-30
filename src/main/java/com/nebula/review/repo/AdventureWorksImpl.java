@@ -21,6 +21,7 @@ public class AdventureWorksImpl implements IAdventureWorks {
 
     @Override
     public void insertReview(RequestMessage message) {
+        log.info("<AdventureWorksImpl> reached with values name: {}, email: {}, productId: {}",message.getName(),message.getEmail(),message.getProductId());
         ProductReview productReview = new ProductReview(Long.valueOf(message.getProductId()),message.getName(),new Date(),message.getEmail(),4L,message.getReview(),new Date());
         try {
             repo.saveAndFlush(productReview);
