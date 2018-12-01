@@ -31,24 +31,8 @@ public class DbConsumer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Bean
-    public TopicExchange emailExchange() {
-        return new TopicExchange(NebulaConstant.EMAIL_EXCHANGE_NAME);
-    }
-
-    @Bean
-    public Queue emailQueueName() {
-        return new Queue(NebulaConstant.EMAIL_QUEUE_NAME);
-    }
-
-    @Bean
-    public Binding declareEmailBinding() {
-        return BindingBuilder.bind(emailQueueName()).to(emailExchange()).with(NebulaConstant.EMAIL_ROUTING_KEY);
-    }
-
-
     @RabbitListener(queues = NebulaConstant.DB_QUEUE_NAME)
-    public void receiveMessage(final RequestMessage message) {
+    public void receiveDbMessage(final RequestMessage message) {
         log.info("Received {} : {}", NebulaConstant.DB_QUEUE_NAME, message.toString());
         adventureWorks.insertReview(message);
         NotificationRequest request = new NotificationRequest.NotificationRequestBuilder(message.getName(),Boolean.TRUE,message.getEmail()).builder();

@@ -19,7 +19,7 @@ public class RequestProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(RequestMessage requestMessage) {
+    public void sendRequestMessage(RequestMessage requestMessage) {
         log.info("Sending message {}",NebulaConstant.REQUEST_QUEUE_NAME);
         rabbitTemplate.convertAndSend(NebulaConstant.REQUEST_EXCHANGE_NAME, NebulaConstant.REQUEST_ROUTING_KEY, requestMessage);
     }

@@ -44,26 +44,9 @@ public class RequestConsumer {
     public Binding declareDbBinding() {
         return BindingBuilder.bind(dbQueueName()).to(dbExchange()).with(NebulaConstant.DB_ROUTING_KEY);
     }
-    /*
-    @Bean
-    public TopicExchange emailExchange() {
-        return new TopicExchange(NebulaConstant.EMAIL_EXCHANGE_NAME);
-    }
-
-    @Bean
-    public Queue emailQueueName() {
-        return new Queue(NebulaConstant.EMAIL_QUEUE_NAME);
-    }*/
-
-    /*@Bean
-    List<Binding> declareDbAndEmailBindings() {
-
-        return Arrays.asList(BindingBuilder.bind(dbQueueName()).to(dbExchange()).with(NebulaConstant.DB_ROUTING_KEY),
-                BindingBuilder.bind(emailQueueName()).to(emailExchange()).with(NebulaConstant.EMAIL_QUEUE_NAME));
-    }*/
 
     @RabbitListener(queues = NebulaConstant.REQUEST_QUEUE_NAME)
-    public void receiveMessage(final RequestMessage message) {
+    public void receiveRequestMessage(final RequestMessage message) {
 
         log.info("Received {} : {}", NebulaConstant.REQUEST_QUEUE_NAME, message.toString());
 

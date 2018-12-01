@@ -107,4 +107,17 @@ public class ProductReview {
         this.modifiedDate = modifiedDate;
     }
 
+    @Override
+    public String toString() {
+        return "ProductReview{" +
+                "productReviewId=" + productReviewId +
+                ", productId=" + productId +
+                ", reviewerName='" + reviewerName + '\'' +
+                ", reviewData=" + reviewData +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", rating=" + rating +
+                ", comments='" + comments + '\'' +
+                ", modifiedDate=" + modifiedDate +
+                '}';
+    }
 }

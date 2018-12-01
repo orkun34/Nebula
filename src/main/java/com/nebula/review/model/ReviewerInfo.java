@@ -42,4 +42,13 @@ public class ReviewerInfo {
         this.productId = productId;
     }
 
+    @Override
+    public String toString() {
+        return "ReviewerInfo{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", productId='" + productId + '\'' +
+                ", review='" + review + '\'' +
+                '}';
+    }
 }

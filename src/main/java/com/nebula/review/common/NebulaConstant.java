@@ -10,9 +10,4 @@ public class NebulaConstant {
     public static final String REQUEST_ROUTING_KEY="messages.req.key";
     public static final String REQUEST_EXCHANGE_NAME="reqExchange";
 
-    public static final String EMAIL_QUEUE_NAME="emailQueue";
-    public static final String EMAIL_ROUTING_KEY="messages.email.key";
-    public static final String EMAIL_EXCHANGE_NAME="emailExchange";
-
-
 }

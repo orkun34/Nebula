@@ -52,4 +52,14 @@ public class NotificationRequest {
             return new NotificationRequest(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "NotificationRequest{" +
+                "name='" + name + '\'' +
+                ", isValid=" + isValid +
+                ", email='" + email + '\'' +
+                ", productId='" + productId + '\'' +
+                '}';
+    }
 }

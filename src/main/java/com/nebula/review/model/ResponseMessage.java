@@ -25,4 +25,12 @@ public class ResponseMessage {
     public void setReviewID(String reviewID) {
         this.reviewID = reviewID;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseMessage{" +
+                "success='" + success + '\'' +
+                ", reviewID='" + reviewID + '\'' +
+                '}';
+    }
 }
