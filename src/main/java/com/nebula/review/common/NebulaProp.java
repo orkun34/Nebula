@@ -10,11 +10,20 @@ import java.util.List;
 @ConfigurationProperties("nebula")
 public class NebulaProp {
 
+    private String nonValids;
 
-    private String nonValidList;
-
-    public List<String> getNonValidList() {
-        return Arrays.asList(nonValidList.split(","));
+    public String getNonValids() {
+        return nonValids;
     }
+
+    public void setNonValids(String nonValids) {
+        this.nonValids = nonValids;
+    }
+
+    public List<String> getNonValidList(){
+        return Arrays.asList(getNonValids().split(","));
+    }
+
+
 
 }

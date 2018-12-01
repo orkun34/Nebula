@@ -1,96 +1,37 @@
 version: '3'
 
 services:
-  docker-mysql:
-    image: mysql:latest
-    build:
-      context: ./
-      dockerfile: ./docker/Dockerfile
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=adventureworks
-      - MYSQL_PASSWORD=root
-    ports:
-      - 3366:3366
 
-  nebula-docker:
-    image: nebula-springboot
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    depends_on:
-      - docker-mysql
-      - rabbitmq
-    ports:
-      - 8087:8087
-    environment:
-      - DATABASE_HOST=docker-mysql
-      - DATABASE_USER=root
-      - DATABASE_PASSWORD=root
-      - DATABASE_NAME=adventureworks
-      - DATABASE_PORT=3366
+
+  nebula-mysql:
+     build:
+        context: ./
+        dockerfile: ./mysql/Dockerfile
+     environment:
+      MYSQL_DATABASE: adventureworks
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+     ports:
+     - "3366:3366"
+     restart: always
+
+  nebula-app:
+      restart: always
+      build:
+        context: ./
+        dockerfile: Dockerfile
+      expose:
+        - "8282"
+      depends_on:
+        - nebula-mysql
+        - rabbitmq-app
+
   rabbitmq-app:
     image: rabbitmq:3.5.3-management
     build:
-      context: ./
-      dockerfile: ./rabbit/Dockerfile
+     context: ./
+     dockerfile: ./rabbit/Dockerfile
     hostname: rabbitmq
     ports:
-      - 5666:5666
-      - 15670:15670
-
- # mysql-app:
-  #  image: mysql:latest
-   # environment:
-    #  MYSQL_ROOT_PASSWORD: "root"
-     # MYSQL_DATABASE: "adventureworks"
-      #MYSQL_USER: "nebula"
-      #MYSQL_PASSWORD: "nebula"
-    #build:
-     # context: ./
-      #dockerfile: ./docker/Dockerfile
-    #volumes:
-     # - /data/mysql
-    #ports:
-      #3 - 3366:3366
-  #web:
-   # image: nebula_app
-    #build:
-     # context: ./
-      #dockerfile: Dockerfile
-    #depends_on:
-     # - mysql-app
-    #ports:
-     #- 8087:8087
-    #restart: always
-    #links:
-     #- "mysql-app:database"
-    #environment:
-     # DATABASE_HOST : "mysql"
-     # DATABASE_USER : "nebula"
-     # DATABASE_PASSWORD : "nebula"
-     # DATABASE_NAME : "adventureworks"
-     # DATABASE_PORT : "3366"
-
-  #app:
-   #   image: nebula_app
-    #  build:
-     #   context: ./
-      #  dockerfile: Dockerfile
-      #depends_on:
-       # - mysql-app
-        #- rabbitmq-app
-      #ports:
-       # - "8087:8087"
-      #volumes:
-       # - /data/nebula_app
-
-  #rabbitmq-app:
-   #   image: rabbitmq:3.5.3-management
-    #  build:
-     #   context: ./
-      #  dockerfile: ./rabbit/Dockerfile
-      #hostname: rabbitmq
-      #ports:
-      #  - "5666:5666"
-       # - "15670:15670"
+     - 5666:5666
+     - 15670:15670

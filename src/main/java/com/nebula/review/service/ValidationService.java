@@ -27,13 +27,7 @@ public class ValidationService implements IValidation {
     public boolean isAppropriate(RequestMessage message, String reviewId) {
 
         log.info("<ValidationService> reached with review :{}",message.getReview());
-        boolean isValid = true;
-
-        List<String> review = Arrays.asList(message.getReview());
-        for (String nonValids : prop.getNonValidList()){
-            if (review.contains(nonValids))
-                isValid=false;
-        }
+        boolean isValid =  !prop.getNonValidList().stream().parallel().anyMatch(message.getReview()::contains);
 
         NotificationRequest notificationRequest = new NotificationRequest.NotificationRequestBuilder(message.getName(), isValid, message.getEmail()).builder();
         if (!isValid) {
