@@ -16,8 +16,8 @@ public final class SingletonHolder {
     private static ConcurrentHashMap<String ,NotificationRequest> archievedMessages = null;
     private static Gson gsonInstance = null;
 
-    private static AtomicInteger atomicIntegerSuccess = new AtomicInteger(0);
-    private static AtomicInteger atomicIntegerFail = new AtomicInteger(0);
+    private AtomicInteger atomicIntegerSuccess = new AtomicInteger(0);
+    private AtomicInteger atomicIntegerFail = new AtomicInteger(0);
 
     private SingletonHolder() {
     }
