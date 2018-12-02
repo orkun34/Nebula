@@ -32,8 +32,10 @@ public class ProductReview {
     @Column(name="modifieddate")
     Date modifiedDate;
 
+    public ProductReview() {
+    }
 
-    public ProductReview(Long productId,String reviewerName, Date reviewData, String emailAddress, Long rating, String comments, Date modifiedDate) {
+    public ProductReview(Long productId, String reviewerName, Date reviewData, String emailAddress, Long rating, String comments, Date modifiedDate) {
         this.productId=productId;
         this.reviewerName = reviewerName;
         this.reviewData = reviewData;

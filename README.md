@@ -9,6 +9,9 @@ Modules that are used in projects are;
  - log4j2.xml
  - mysql
 
+##### Default Queue Definitions
+There are 2 queues which are **requestQueue** and **dbQueue**. These are defined static final in src/main/com/nebula/review/common/NebulaConstant.java
+
 #### Legacy usage (default property)
 If rabbitmq(port:15672) and some modules of mysql(port:3306) already install in your localhost , do followings;
  - Run /db/adventureworks_productreview.sql in your SQL window of MYSQL
@@ -17,7 +20,7 @@ If rabbitmq(port:15672) and some modules of mysql(port:3306) already install in 
 mvn spring-boot:run
 ```
 #### Docker usage
-Unless use docker option, which you can run with buildAndRun.sh which is available at project directory
+Use docker option, which you can run with buildAndRun.sh which is available at project directory
 ```sh
 mvn clean install
 docker-compose up

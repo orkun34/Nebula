@@ -3,15 +3,16 @@ package com.nebula.review.model;
 public class NotificationRequest {
 
     private String name;
-    private boolean isValid;
+    private String isValid;
     private String email;
     private String productId;
+    private String review;
 
     public String getName() {
         return name;
     }
 
-    public boolean isValid() {
+    public String getIsValid() {
         return isValid;
     }
 
@@ -23,6 +24,12 @@ public class NotificationRequest {
         return productId;
     }
 
+    public String getReview() {
+        return review;
+    }
+
+
+
     private NotificationRequest(NotificationRequestBuilder builder) {
         this.name = builder.name;
         this.isValid = builder.isValid;
@@ -33,11 +40,12 @@ public class NotificationRequest {
     public static class NotificationRequestBuilder{
 
         private String name;
-        private boolean isValid;
+        private String isValid;
         private String email;
         private String productId;
+        private String review;
 
-        public NotificationRequestBuilder(String name, boolean isValid, String email) {
+        public NotificationRequestBuilder(String name, String isValid, String email) {
             this.name = name;
             this.isValid = isValid;
             this.email = email;
@@ -47,6 +55,12 @@ public class NotificationRequest {
             this.productId=productId;
             return this;
         }
+
+        public NotificationRequestBuilder setReview(String review){
+            this.review=review;
+            return this;
+        }
+
 
         public NotificationRequest builder(){
             return new NotificationRequest(this);

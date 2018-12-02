@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AdventureWorksImpl implements IAdventureWorks {
@@ -29,6 +30,11 @@ public class AdventureWorksImpl implements IAdventureWorks {
             log.error("Exception happened : {}", ex);
         }
 
+    }
+
+    @Override
+    public List<ProductReview> listProductReviews() {
+        return repo.findAll();
     }
 
 }

@@ -1,7 +1,5 @@
 package com.nebula.review.model;
 
-import com.google.common.base.CharMatcher;
-
 public class ReviewerInfo {
 
     private String name;

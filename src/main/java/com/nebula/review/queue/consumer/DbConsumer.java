@@ -7,14 +7,9 @@ import com.nebula.review.model.RequestMessage;
 import com.nebula.review.repo.intrface.IAdventureWorks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,7 +30,7 @@ public class DbConsumer {
     public void receiveDbMessage(final RequestMessage message) {
         log.info("Received {} : {}", NebulaConstant.DB_QUEUE_NAME, message.toString());
         adventureWorks.insertReview(message);
-        NotificationRequest request = new NotificationRequest.NotificationRequestBuilder(message.getName(),Boolean.TRUE,message.getEmail()).builder();
+        NotificationRequest request = new NotificationRequest.NotificationRequestBuilder(message.getName(),String.valueOf(Boolean.TRUE),message.getEmail()).builder();
         SingletonHolder.getInstance().getReviewedMessageHashMap().put(message.getReviewId(), request);
     }
 }

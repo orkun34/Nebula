@@ -40,8 +40,8 @@ public class ReviewReport {
         Iterator<Map.Entry<String, NotificationRequest>> iterator = SingletonHolder.getInstance().getReviewedMessageHashMap().entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, NotificationRequest> entry = iterator.next();
-            log.info("Dear {} , your review which was send via {} has been {}", entry.getValue().getName(), entry.getValue().getEmail(), entry.getValue().isValid() ? "ACCEPTED" : "REJECTED");
-            if (entry.getValue().isValid()) {
+            log.info("Dear {} , your review which was send via {} has been {}", entry.getValue().getName(), entry.getValue().getEmail(), Boolean.valueOf(entry.getValue().getIsValid()) ? "ACCEPTED" : "REJECTED");
+            if (entry.getValue().getIsValid().equals(Boolean.TRUE)) {
                 SingletonHolder.getInstance().getSuccess().incrementAndGet();
             } else {
                 SingletonHolder.getInstance().getFail().incrementAndGet();

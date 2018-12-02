@@ -5,19 +5,23 @@ import com.nebula.review.common.SingletonHolder;
 import com.nebula.review.model.RequestMessage;
 import com.nebula.review.model.ResponseMessage;
 import com.nebula.review.model.ReviewerInfo;
-import org.apache.commons.io.IOUtils;
+import com.nebula.review.repo.intrface.IAdventureWorks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 @RestController
 public class ReviewController {
+
+    @Autowired
+    IAdventureWorks adventureWorks;
 
 
     private static final Logger log = LoggerFactory.getLogger(ReviewController.class);
