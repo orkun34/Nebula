@@ -38,14 +38,23 @@ public class ReviewController {
 
         log.info("Rest request just received !!!");
 
-        ReviewerInfo reviewerInfo = SingletonHolder.getInstance().getGson().fromJson(body,ReviewerInfo.class);
+        ResponseMessage response = new ResponseMessage(Boolean.FALSE.toString(),"");
+        ReviewerInfo reviewerInfo;
+        try {
+            reviewerInfo = SingletonHolder.getInstance().getGson().fromJson(body,ReviewerInfo.class);
 
-        String reviewID =  SingletonHolder.getInstance().generateReviewID();
+            String reviewID =  SingletonHolder.getInstance().generateReviewID();
 
-        final RequestMessage requestMessage = new RequestMessage(reviewerInfo.getName(),reviewerInfo.getEmail(),reviewerInfo.getProductId(),reviewerInfo.getReview(),reviewID);
-        rabbitTemplate.convertAndSend(NebulaConstant.REQUEST_EXCHANGE_NAME,NebulaConstant.REQUEST_ROUTING_KEY,requestMessage);
+            final RequestMessage requestMessage = new RequestMessage(reviewerInfo.getName(),reviewerInfo.getEmail(),reviewerInfo.getProductId(),reviewerInfo.getReview(),reviewID);
+            rabbitTemplate.convertAndSend(NebulaConstant.REQUEST_EXCHANGE_NAME,NebulaConstant.REQUEST_ROUTING_KEY,requestMessage);
 
-        ResponseMessage response = new ResponseMessage(Boolean.TRUE.toString(),reviewID);
+            response = new ResponseMessage(Boolean.TRUE.toString(),reviewID);
+        }catch(NumberFormatException nex){
+            log.error("Occurred by {}",nex);
+        }catch (Exception ex){
+            log.error("Exception occurred {]",ex);
+        }
+
 
         return response;
     }
