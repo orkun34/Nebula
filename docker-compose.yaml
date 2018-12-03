@@ -12,13 +12,12 @@ services:
      environment:
       MYSQL_DATABASE: adventureworks
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_HOST: localhost
      ports:
       - "3369:3306"
      #restart: always
 
   nebula-app:
-      #container_name: some-app
       image: nebula-springboot
       container_name: nebula-cont-springboot
       #restart: always
@@ -31,14 +30,14 @@ services:
        - "8282:8080"
       depends_on:
         - nebula-mysql
-        #- rabbitmq-app
+        - rabbitmq-app
 
-  #rabbitmq-app:
-   # image: rabbitmq:3.5.3-management
-    #build:
-     #context: ./
-     #dockerfile: ./rabbit/Dockerfile
-    #hostname: rabbitmq
-    #ports:
-     #- 5666:5666
-     #- 15670:15670
+  rabbitmq-app:
+    image: rabbitmq:3.5.3-management
+    build:
+     context: ./
+     dockerfile: ./rabbit/Dockerfile
+    hostname: rabbitmq
+    ports:
+     - "5666:5672"
+     - "15670:15672"

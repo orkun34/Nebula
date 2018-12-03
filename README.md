@@ -23,8 +23,8 @@ mvn spring-boot:run
 Use docker option, which you can run with buildAndRun.sh which is available at project directory
 ```sh
 mvn clean install
-docker-compose build
-docker-compose up
+docker-compose up nebula-cont-mysql
+docker-compose up nebula-cont-springboot
 ```
 ##### Key notes
 There are 3 Dockerfile and 1 sql script;
