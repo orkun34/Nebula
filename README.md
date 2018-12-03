@@ -20,12 +20,14 @@ If rabbitmq(port:15672) and some modules of mysql(port:3306) already install in 
 mvn spring-boot:run
 ```
 #### Docker usage
-Use docker option, which you can run with buildAndRun.sh which is available at project directory
+Run below command in order
 ```sh
 mvn clean install
-docker-compose up nebula-cont-mysql
-docker-compose up nebula-cont-springboot
+docker-compose up nebula-mysql
+docker-compose up nebula-rabbitmq
+docker-compose up nebula-app
 ```
+(Actually I provided depedency for nebula-app that belongs to nebula-mysql and nebula-rabbitmq , but didn't work. Therefore better to run them in order in project folder)
 ##### Key notes
 There are 3 Dockerfile and 1 sql script;
  * In project direcotory
