@@ -4,6 +4,8 @@ services:
 
 
   nebula-mysql:
+     container_name: nebula-cont-mysql
+     image: mysql
      build:
         context: ./
         dockerfile: ./mysql/Dockerfile
@@ -12,26 +14,31 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
      ports:
-     - "3366:3366"
-     restart: always
+      - "3369:3306"
+     #restart: always
 
   nebula-app:
-      restart: always
+      #container_name: some-app
+      image: nebula-springboot
+      container_name: nebula-cont-springboot
+      #restart: always
       build:
         context: ./
         dockerfile: Dockerfile
-      expose:
-        - "8282"
+      #expose:
+        #- "8282"
+      ports:
+       - "8282:8080"
       depends_on:
         - nebula-mysql
-        - rabbitmq-app
+        #- rabbitmq-app
 
-  rabbitmq-app:
-    image: rabbitmq:3.5.3-management
-    build:
-     context: ./
-     dockerfile: ./rabbit/Dockerfile
-    hostname: rabbitmq
-    ports:
-     - 5666:5666
-     - 15670:15670
+  #rabbitmq-app:
+   # image: rabbitmq:3.5.3-management
+    #build:
+     #context: ./
+     #dockerfile: ./rabbit/Dockerfile
+    #hostname: rabbitmq
+    #ports:
+     #- 5666:5666
+     #- 15670:15670
